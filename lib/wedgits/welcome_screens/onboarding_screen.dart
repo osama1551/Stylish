@@ -136,7 +136,7 @@ class OnboardingScreen extends StatelessWidget {
                           onTap: () {
                             // Handle Skip
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => const ShoppingApp()));
+                                MaterialPageRoute(builder: (context) => const HomeScreen()));
                           },
                           child: const Text(
                             'Skip',

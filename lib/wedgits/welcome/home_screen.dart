@@ -1,26 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class ShoppingApp extends StatelessWidget {
-  const ShoppingApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Stylish Shopping App',
-      theme: ThemeData.dark().copyWith(
-        // Dark background color matching the image
-        scaffoldBackgroundColor: const Color(0xFF1E1E2D),
-        // Custom text theme for general white text
-        textTheme: const TextTheme(
-          bodyLarge: TextStyle(color: Colors.white),
-          bodyMedium: TextStyle(color: Colors.white),
-        ),
-      ),
-      home: const HomeScreen(),
-    );
-  }
-}
 
 // Data models for simplicity
 class Brand {
@@ -43,11 +23,11 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   final List<Brand> brands = const [
-    // Note: To display logos, replace null with actual asset paths
-    Brand('Adidas', logoPath: 'assets/adidas_logo.png'),
-    Brand('Nike', logoPath: 'assets/nike_logo.png'),
-    Brand('Fila', logoPath: 'assets/fila_logo.png'),
-    Brand('Puma', logoPath: 'assets/puma_logo.png'),
+    // Using SVG assets for all logos
+    Brand('Adidas', logoPath: 'assets/images/adidas_logo.png'), // Keep PNG for Adidas
+    Brand('Nike', logoPath: 'assets/images/nike_logo.png'),     // Use SVG for Nike
+    Brand('Fila', logoPath: 'assets/images/fila_logo.svg'),     // Use SVG
+    Brand('Puma', logoPath: 'assets/images/puma_logo.svg'),       // Use SVG
   ];
 
   final List<Product> products = const [
@@ -283,6 +263,32 @@ class BrandChip extends StatelessWidget {
     super.key,
   });
 
+  Widget _buildLogo(String logoPath) {
+    // Check if it's an SVG file
+    if (logoPath.toLowerCase().endsWith('.svg')) {
+      return SvgPicture.asset(
+        logoPath,
+        width: 18,
+        height: 18,
+        fit: BoxFit.contain,
+        colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+        placeholderBuilder: (context) => const Icon(Icons.star, size: 18, color: Colors.white),
+      );
+    }
+    
+    // For PNG files, use Image.asset
+    return Image.asset(
+      logoPath,
+      width: 18,
+      height: 18,
+      fit: BoxFit.contain,
+      errorBuilder: (context, error, stackTrace) {
+        // Fallback to icon if image fails to load
+        return const Icon(Icons.star, size: 18, color: Colors.white);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -294,11 +300,11 @@ class BrandChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // If you had logos, you'd use Image.asset here
+          // Display actual logos (PNG and SVG support)
           if (logoPath != null)
-            const Padding(
-              padding: EdgeInsets.only(right: 5.0),
-              child: Icon(Icons.star, size: 18, color: Colors.white), // Placeholder for logo
+            Padding(
+              padding: const EdgeInsets.only(right: 5.0),
+              child: _buildLogo(logoPath!),
             ),
           Text(
             name,

@@ -131,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const ShoppingApp()));
+                      MaterialPageRoute(builder: (context) => const HomeScreen()));
                 },
                 child: const Text(
                   'Sign Up',

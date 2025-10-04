@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: //_handleLogin,
 
                 (){Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const ShoppingApp()));},
+                    MaterialPageRoute(builder: (context) => const HomeScreen()));},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                   padding: const EdgeInsets.symmetric(vertical: 15),
