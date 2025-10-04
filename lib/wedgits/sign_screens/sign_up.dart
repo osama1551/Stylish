@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stylish/wedgits/welcome/home_screen.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -34,7 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   icon: const Icon(Icons.arrow_back),
                   color: Colors.white,
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.pop(context);
                   },
                 ),
 
@@ -128,7 +130,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
                 onPressed: () {
-                  // Handle Sign Up button press
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const ShoppingApp()));
                 },
                 child: const Text(
                   'Sign Up',

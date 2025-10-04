@@ -23,17 +23,18 @@ class MyApp extends StatelessWidget {
           onPrimary: Colors.white,
           onSurface: Colors.white,
         ),
+
         inputDecorationTheme: const InputDecorationTheme(
+          hintStyle: TextStyle(color: Colors.white54),
           labelStyle: TextStyle(color: Colors.white70),
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.white70),
           ),
-
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Color(0xFF8A2BE2)),
           ),
         ),
-         // A deep, dark background color
+        // A deep, dark background color
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent, // Make AppBar transparent
           elevation: 0, // Remove shadow
@@ -75,7 +76,7 @@ class _SplashScreenWithNavigationState extends State<SplashScreenWithNavigation>
   void initState() {
     super.initState();
     // Navigate to onboarding screen after 3 seconds
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 6), () {
       if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const OnboardingScreen()),

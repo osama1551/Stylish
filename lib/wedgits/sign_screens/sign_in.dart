@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/wedgits/sign_screens/sign_up.dart';
+import 'package:stylish/wedgits/welcome/home_screen.dart';
 
 import 'forget_password.dart';
 
@@ -139,7 +140,10 @@ class _LoginPageState extends State<LoginPage> {
 
               // Login Button
               ElevatedButton(
-                onPressed: _handleLogin,
+                onPressed: //_handleLogin,
+
+                (){Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const ShoppingApp()));},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                   padding: const EdgeInsets.symmetric(vertical: 15),

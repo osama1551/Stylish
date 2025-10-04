@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/wedgits/GetStarted_Screen.dart';
+import 'package:stylish/wedgits/welcome/home_screen.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -134,6 +135,8 @@ class OnboardingScreen extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             // Handle Skip
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => const ShoppingApp()));
                           },
                           child: const Text(
                             'Skip',

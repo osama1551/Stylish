@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 import 'dart:async'; // Required for Timer
 import 'package:stylish/wedgits/sign_screens/sign_in.dart';
+import 'package:stylish/wedgits/sign_screens/reset_password.dart';
 class VerificationCodeScreen extends StatefulWidget {
   const VerificationCodeScreen({super.key});
-
   @override
   State<VerificationCodeScreen> createState() => _VerificationCodeScreenState();
 }
-
 class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
   // Verification code digits
   final List<String> codeDigits = ['', '', '', '']; // Pre-filled as in the image
   int _secondsRemaining = 20;
   Timer? _timer;
-
   @override
   void initState() {
     super.initState();
     _startTimer();
   }
-
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_secondsRemaining > 0) {
@@ -32,27 +29,24 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
       }
     });
   }
-
   @override
   void dispose() {
     _timer?.cancel();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     // Get screen width for responsive sizing
     final double screenWidth = MediaQuery.of(context).size.width;
     // Calculate a size for the code boxes (roughly 1/5th of the screen width)
     final double boxSize = screenWidth / 4.6 - 6 ;
-
     // Adjusted for spacing
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
+            Navigator.pop(context);
             // Handle back button press
           },
         ),
@@ -64,7 +58,6 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
-
                 children: <Widget>[
                   const Padding(
                     padding: EdgeInsets.only(top: 20.0, bottom: 40.0),
@@ -162,6 +155,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
             height: 95,
             child: ElevatedButton(
               onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const NewPasswordScreen()));
                 // Handle confirmation logic
               },
               style: ElevatedButton.styleFrom(
@@ -274,9 +268,7 @@ class _VerificationCodeBoxState extends State<VerificationCodeBox> {
               _controller.text = '';
               return;
             }
-            
             widget.onDigitChanged(value);
-            
             // Auto-move to next field
             if (value.isNotEmpty && widget.index < 3) {
               // Find next focus node
